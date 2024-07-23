@@ -1,0 +1,6 @@
+numpy
+torch>=2.0.1
+scipy
+gymnasium
+matplotlib
+absl-py

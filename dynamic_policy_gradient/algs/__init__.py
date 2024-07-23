@@ -1,0 +1,2 @@
+from dynamic_policy_gradient.algs.softmax_pg import SoftmaxPG
+from dynamic_policy_gradient.algs.softmax_dpg import DynamicSoftmaxPG
