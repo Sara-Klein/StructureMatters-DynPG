@@ -143,8 +143,10 @@ env.bak/
 venv.bak/
 
 #loggings
-log/
+logs/
+.logs
 *.log
+.log 
 
 # Spyder project settings
 .spyderproject

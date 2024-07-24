@@ -61,7 +61,7 @@ def plot_success_probs(computational_power,discount_factor, rounds,pg_lr, dpg_lr
     plt.tight_layout()
 
     # Save the plot as an image file{
-    plot_file_path = os.path.join("plots", f"sucess_plot_{env_name}__rewards={reward_list[0]}_eps={eps}_gamma={discount_factor}_rounds={rounds}_pglr={pg_lr[0]}_dpr_lr={dpg_lr[0]}_adaptive={adaptive[0]}.png")
+    plot_file_path = os.path.join("plots", f"sucess_plot_{env_name}_Ns40_rewards={reward_list[0]}_eps={eps}_gamma={discount_factor}_rounds={rounds}_pglr={pg_lr[0]}_dpr_lr={dpg_lr[0]}_adaptive={adaptive[0]}.png")
     os.makedirs("plots", exist_ok=True)
     plt.savefig(plot_file_path)
 

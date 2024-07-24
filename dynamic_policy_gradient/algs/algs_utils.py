@@ -17,16 +17,15 @@ class TabularSoftmaxPolicy(nn.Module):
      
 
     def forward(self, state):
-        return F.softmax(self.logits[state], dim=-1)
+        return F.softmax(self.logits[state], dim=-1, dtype=torch.double)
 
     def get_action(self, state):
         probs = self.forward(state)
-        try:
-            dist = torch.distributions.Categorical(probs)
-        except:
-            return 1, 1, 1
+        dist = torch.distributions.Categorical(probs)
         action = dist.sample()
         log_prob = dist.log_prob(action)
+        #probs to float
+        probs = probs.float()
         return action.item(), log_prob, probs
 
 

@@ -35,7 +35,7 @@ def _run_algos():
         print(f'Config {config_name}', config)
         combinations = list(itertools.product(
             config.algorithm, config.env_name, config.action_list, config.reward_list,config.discount_factor,  
-            config.eps, config.pg_lr, config.dpg_lr, config.adaptive, config.dpg_Ns, 
+            config.eps, config.pg_lr, config.dpg_lr, config.adaptive, config.dpg_Ns,
             config.computational_power, config.gradient_clipping, config.reward_normalization, 
             config.copy_weights, config.rounds
         ))
@@ -64,7 +64,7 @@ def _run_algo(algorithm, env_name, action_list, reward_list, discount_factor,
             change_log_file(
                 os.path.join(
                     "logs",
-                    f"{env_name}_{algorithm}_eps={eps}_gamma={discount_factor}_lr={lr_to_record}.log",
+                    f"round_{i}_{env_name}_{algorithm}_eps={eps}_gamma={discount_factor}_lr={lr_to_record}.log",
                 )
             )
         env = _ENVS[env_name](discount_factor,seed, action_list, reward_list)

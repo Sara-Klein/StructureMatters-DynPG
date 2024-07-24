@@ -42,9 +42,12 @@ class SoftmaxPG:
         #num_eval_episodes,
     ):  
         num_iter_per_episode= math.ceil(1 / (1 - discount_factor)) #max-iterations per run in PG
+        
         if adaptive: 
+                # stepsize for PG is the last in DynPG (Horizon is 6)
                 pg_lr = 2*(1-self.env.discount_factor) / (1-self.env.discount_factor**6)
         
+        # initialize stationary policy
         self.init_policy(pg_lr)
 
         torch.manual_seed(self.seed)
@@ -53,12 +56,12 @@ class SoftmaxPG:
         episode_rewards = []  # To store the total reward per episode
         episode_V_gaps = []  # To store the V gap per episode
         episode_actual_Vs = []  # To store the achieved V per episode
-        #episode_std = []  # to store the std of the achieved V per episode
         sample_path = []
         total_samples = 0
         total_episodes = 0
         V_gap = float("inf")
 
+        # Training loop of stationary policy
         while V_gap > eps and total_samples<computational_power:
             state, _ = self.env.reset()
             total_episodes += 1
@@ -79,6 +82,7 @@ class SoftmaxPG:
 
             episode_rewards.append(episode_reward)
 
+            #update policy
             self.optimizer.zero_grad()
             loss = compute_loss(
                 log_probs, rewards, discount_factor, reward_normalization, self.device
@@ -91,19 +95,18 @@ class SoftmaxPG:
 
             self.optimizer.step()
 
+            # only for recording purpose
             optimal_V, actual_V = self.env.evaluate_stationary(self)
             V_gap = optimal_V - actual_V
-
             episode_V_gaps.append(V_gap)
             episode_actual_Vs.append(actual_V)
-            #episode_std.append(std)
             sample_path.append(total_samples)
 
-            # if total_episodes % 50 ==0:
-            #     # logging and minitoring
-            #     logging.info(
-            #         f"Episode {total_episodes}: Loss = {loss.item():.3f}, V Gap = {V_gap:.3f}, Actual V = {actual_V:.3f}, Learning rate = {self.optimizer.param_groups[0]['lr']:.3f}"
-            #     )
+            if total_episodes % 100 ==0:
+                # logging and minitoring
+                logging.info(
+                    f"Samples {total_samples}: Loss = {loss.item():.3f}, V Gap = {V_gap:.3f}"
+                )
 
         # house keeping
         self.episode_rewards = episode_rewards
@@ -113,11 +116,9 @@ class SoftmaxPG:
         self.total_samples = total_samples
         self.avg_samples_per_episode = total_samples / total_episodes
         self.sample_path = sample_path
-
-        # logging.info(f"Policy is: \n {F.softmax(self.policy.logits, dim=1).detach()}")
-        # logging.info(
-        #     f"Total episodes: {total_episodes}, Total samples: {total_samples}, Avg Samples per episode: {self.avg_samples_per_episode:.3f}"
-        # )
+        logging.info(
+            f"Total episodes: {total_episodes}, Total samples: {total_samples}."
+        )
         logging.info(f"Solution returned with V gap: {V_gap:.3f}")
         logging.info("--------------Training Completed--------------")
         self.env.close()
