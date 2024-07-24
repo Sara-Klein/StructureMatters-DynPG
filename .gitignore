@@ -38,6 +38,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+*.pyc
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -140,6 +141,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+#loggings
+log/
+*.log
 
 # Spyder project settings
 .spyderproject
