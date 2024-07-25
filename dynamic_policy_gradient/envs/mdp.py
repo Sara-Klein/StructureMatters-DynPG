@@ -194,7 +194,6 @@ class FiniteMDP(gymnasium.Env):
                 V = V_new
                 
             V = torch.tensor([V[s] for s in init_states]).squeeze()
-            #logging.info(f" V is {V}")
             return  torch.mean(V)
     
         else:
@@ -222,11 +221,8 @@ class FiniteMDP(gymnasium.Env):
                         _, _, action_probs = alg.policy.get_action(state)
                     
                     help2 = action_probs
-                    #help2 = action_probs[torch.nonzero(help)].squeeze()
-                    #logging.info(f"tensor is {help2}")
                     match state:
                         case 1: 
-                            #logging.info(f"tensor is {self.reward_function[state, :]}")
                             actual_V_new[state] = torch.dot(help2, self.reward_function[state, :]).item()
                         case 2:
                             help2 = action_probs[torch.nonzero(help2)].squeeze()
