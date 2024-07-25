@@ -32,7 +32,7 @@ class SoftmaxPG:
         discount_factor,
         gradient_clipping,
         reward_normalization,
-        computational_power,
+        max_interactions,
         adaptive
     ):  
         num_iter_per_episode= math.ceil(1 / (1 - discount_factor)) #max-iterations per run in PG
@@ -56,7 +56,7 @@ class SoftmaxPG:
         V_gap = float("inf")
 
         # Training loop of stationary policy
-        while V_gap > eps and total_samples<computational_power:
+        while V_gap > eps and total_samples<max_interactions:
             state, _ = self.env.reset()
             total_episodes += 1
 

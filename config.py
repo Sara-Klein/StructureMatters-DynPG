@@ -9,7 +9,7 @@ class _AlgosConfig():
     env_name: Iterable[str] = ("Sutton-extended",)
     action_list: Iterable[Iterable[int]] = ((0, 300, 3, 0, 5, 5, 0),)
     reward_list: Iterable[Iterable[Iterable[float]]] = (((0,0),(-0.75,10),(0,0),(0,0),(1.25,1.25),(1.25,1.25)),)
-    discount_factor: Iterable[float] = (0.9,)
+    discount_factor: Iterable[float] = (0.99,)
     
     eps: Iterable[float] = (0.01,) # accuracy
 

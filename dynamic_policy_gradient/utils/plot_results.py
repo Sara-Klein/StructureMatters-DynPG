@@ -5,7 +5,7 @@ import pickle
 
 
 
-def plot_success_probs(computational_power,discount_factor, rounds,pg_lr, dpg_lr, adaptive,env_name,eps, reward_list,Ns):
+def plot_success_probs(max_interactions,discount_factor, rounds,pg_lr, dpg_lr, adaptive,env_name,eps, reward_list,Ns):
     discount_factor = discount_factor[0]
     plt.figure(figsize=(6, 5))
     total_samples_pg = []
@@ -25,21 +25,21 @@ def plot_success_probs(computational_power,discount_factor, rounds,pg_lr, dpg_lr
     
     probs_pg = []
     probs_dpg = []
-    for compute in range(computational_power):
+    for compute in range(max_interactions):
         probs_pg.append(np.sum([1 for i in total_samples_pg if i < compute]) / rounds)
         probs_dpg.append(np.sum([1 for i in total_samples_dpg if i < compute]) / rounds)
 
 
     # Plot 
     plt.plot(
-        range(computational_power),
+        range(max_interactions),
         probs_pg,
         label="PG",
         color="orange",
         linewidth=2.5,
     )
     plt.plot(
-        range(computational_power),
+        range(max_interactions),
         probs_dpg,
         label="DynPG",
         color="blue",
@@ -47,9 +47,9 @@ def plot_success_probs(computational_power,discount_factor, rounds,pg_lr, dpg_lr
     )
 
     # enlarge ticksize and label size
-    plt.xlabel("Computational power", fontsize=20)
-    plt.ylabel("Success Probability", fontsize=20)
-    plt.legend(loc="lower right", fontsize=20)
+    plt.xlabel("Interactions with environment", fontsize=15)
+    plt.ylabel("Success Probability", fontsize=15)
+    plt.legend(loc="lower right", fontsize=15)
 
     # set ticksize
     plt.xticks(fontsize=20)

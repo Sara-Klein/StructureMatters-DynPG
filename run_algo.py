@@ -36,7 +36,7 @@ def _run_algos():
         combinations = list(itertools.product(
             config.algorithm, config.env_name, config.action_list, config.reward_list,config.discount_factor,  
             config.eps, config.pg_lr, config.dpg_lr, config.adaptive, config.dpg_Ns,
-            config.computational_power, config.gradient_clipping, config.reward_normalization, 
+            config.cmax_interactions, config.gradient_clipping, config.reward_normalization, 
             config.copy_weights, config.rounds
         ))
         
@@ -44,13 +44,13 @@ def _run_algos():
             _run_algo(*params)
 
     
-    plot_success_probs(config.computational_power[0], config.discount_factor, 
+    plot_success_probs(config.max_interactions[0], config.discount_factor, 
                         config.rounds[0], config.pg_lr, config.dpg_lr,config.adaptive,
                         config.env_name[0], config.eps[0], config.reward_list, config.dpg_Ns[0])
             
 
 def _run_algo(algorithm, env_name, action_list, reward_list, discount_factor, 
-              eps, pg_lr, dpg_lr, adaptive, dpg_Ns, computational_power,
+              eps, pg_lr, dpg_lr, adaptive, dpg_Ns, max_interactions,
               gradient_clipping, reward_normalization, copy_weights,
               rounds):
     # one can speficify seeds for reproducibility; 
@@ -81,7 +81,7 @@ def _run_algo(algorithm, env_name, action_list, reward_list, discount_factor,
                 discount_factor,
                 gradient_clipping,
                 reward_normalization,
-                computational_power,
+                max_interactions,
                 adaptive
                 )
             case "dpg":
@@ -94,7 +94,7 @@ def _run_algo(algorithm, env_name, action_list, reward_list, discount_factor,
                 gradient_clipping,
                 reward_normalization,
                 copy_weights,
-                computational_power,
+                max_interactions,
                 )
             case _:
                 raise ValueError(f"Algorithm {alg} not found")

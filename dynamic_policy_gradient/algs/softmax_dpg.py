@@ -52,7 +52,7 @@ class DynamicSoftmaxPG:
         gradient_clipping,
         reward_normalization,
         copy_weights,
-        computational_power,
+        max_interactions,
     ):
         torch.manual_seed(self.seed)
 
@@ -69,7 +69,7 @@ class DynamicSoftmaxPG:
         V_gap = float("inf")
 
         # Outer training loop over horizons in DynPG 
-        while V_gap > eps and total_samples<computational_power:
+        while V_gap > eps and total_samples<max_interactions:
             if adaptive: 
                 lr_h = 2*(1-self.env.discount_factor) / (1-(self.env.discount_factor**(h+1)))
                 N_h = math.ceil(45* (1-(self.env.discount_factor**(h+1))) / (1-self.env.discount_factor)) # number of episodes for the current horizon
@@ -129,7 +129,7 @@ class DynamicSoftmaxPG:
                 episode_actual_Vs.append(actual_V)
                 sample_path.append(total_samples)
 
-                if total_samples>computational_power:
+                if total_samples>max_interactions:
                     break
                 
 
