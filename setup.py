@@ -7,5 +7,11 @@ setup(
     install_requires=[
         # list your package dependencies here
         # e.g., 'numpy', 'pandas>=1.0.0'
+        "numpy",
+        "torch>=2.0.1",
+        "scipy",
+        "gymnasium",
+        "matplotlib",
+        "absl-py"
     ],
 )

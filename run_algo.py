@@ -46,7 +46,7 @@ def _run_algos():
     
     plot_success_probs(config.computational_power[0], config.discount_factor, 
                         config.rounds[0], config.pg_lr, config.dpg_lr,config.adaptive,
-                        config.env_name[0], config.eps[0], config.reward_list)
+                        config.env_name[0], config.eps[0], config.reward_list, config.dpg_Ns[0])
             
 
 def _run_algo(algorithm, env_name, action_list, reward_list, discount_factor, 

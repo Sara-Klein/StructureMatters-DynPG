@@ -75,7 +75,7 @@ class DynamicSoftmaxPG:
         while V_gap > eps and total_samples<computational_power:
             if adaptive: 
                 lr_h = 2*(1-self.env.discount_factor) / (1-(self.env.discount_factor**(h+1)))
-                N_h = math.ceil(40* (1-(self.env.discount_factor**(h+1))) / (1-self.env.discount_factor)) # number of episodes for the current horizon
+                N_h = math.ceil(45* (1-(self.env.discount_factor**(h+1))) / (1-self.env.discount_factor)) # number of episodes for the current horizon
             else:
                 try:
                     lr_h = lr[h] # learning rate for the current horizon

@@ -1,5 +1,3 @@
-#from dynamic_policy_gradient.utils.hallway import evaluate_stationary
-#from dynamic_policy_gradient.utils.lower_bound_example import evaluate_lower_bound_example
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -7,7 +5,7 @@ import pickle
 
 
 
-def plot_success_probs(computational_power,discount_factor, rounds,pg_lr, dpg_lr, adaptive,env_name,eps, reward_list):
+def plot_success_probs(computational_power,discount_factor, rounds,pg_lr, dpg_lr, adaptive,env_name,eps, reward_list,Ns):
     discount_factor = discount_factor[0]
     plt.figure(figsize=(6, 5))
     total_samples_pg = []
@@ -60,8 +58,12 @@ def plot_success_probs(computational_power,discount_factor, rounds,pg_lr, dpg_lr
 
     plt.tight_layout()
 
-    # Save the plot as an image file{
-    plot_file_path = os.path.join("plots", f"sucess_plot_{env_name}_Ns40_rewards={reward_list[0]}_eps={eps}_gamma={discount_factor}_rounds={rounds}_pglr={pg_lr[0]}_dpr_lr={dpg_lr[0]}_adaptive={adaptive[0]}.png")
+    # Save the plot as an image file
+    if adaptive[0]:
+        plot_file_path = os.path.join("plots", f"sucess_plot_{env_name}_rewards={reward_list[0]}_eps={eps}_gamma={discount_factor}_rounds={rounds}_adaptive={adaptive[0]}.png")
+    else:
+        plot_file_path = os.path.join("plots", f"sucess_plot_{env_name}_rewards={reward_list[0]}_eps={eps}_gamma={discount_factor}_rounds={rounds}_pglr={pg_lr[0]}_dpglr={dpg_lr[0]}_dpgNs={Ns[0]}.png")
+
     os.makedirs("plots", exist_ok=True)
     plt.savefig(plot_file_path)
 
