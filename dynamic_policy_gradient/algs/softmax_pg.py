@@ -4,7 +4,6 @@ import torch.optim as optim
 import torch.nn.functional as F
 import logging
 from dynamic_policy_gradient.algs.algs_utils import TabularSoftmaxPolicy, compute_loss
-#from dynamic_policy_gradient.utils.hallway import evaluate_hallway_stationary, evaluate_hallway_optimal_V
 import math
 
 class SoftmaxPG:
@@ -13,17 +12,13 @@ class SoftmaxPG:
         self.env = env
         self.seed = env.seed
         self.optimal_V = env.evaluate_optimal_V()
-        #logging.info(f"Optimal_value is: {self.optimal_V}")
         self.device = device
         self.action_list = action_list
 
         if self.seed is not None:
             torch.manual_seed(self.seed)
-            #logging.info(f"Random seed set to: {self.seed}")
     
     def init_policy(self, lr):
-        # logging hyper parameters
-        #logging.info(f"Learning rate set to: {lr}")
         self.policy = TabularSoftmaxPolicy(
             self.env.observation_space.n, self.env.action_space.n, self.device, self.action_list
         )
@@ -39,7 +34,6 @@ class SoftmaxPG:
         reward_normalization,
         computational_power,
         adaptive
-        #num_eval_episodes,
     ):  
         num_iter_per_episode= math.ceil(1 / (1 - discount_factor)) #max-iterations per run in PG
         

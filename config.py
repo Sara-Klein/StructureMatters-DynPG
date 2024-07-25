@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 import typing
 from typing import Iterable
-import numpy as np
-import math
+
 
 @dataclass
 class _AlgosConfig():

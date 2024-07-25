@@ -4,7 +4,6 @@ import torch.optim as optim
 import torch.nn.functional as F
 import logging
 from dynamic_policy_gradient.algs.algs_utils import TabularSoftmaxPolicy, compute_loss_h
-#from dynamic_policy_gradient.utils.hallway import evaluate_stationary, evaluate_h, evaluate_optimal_V
 import math
 import numpy as np
 
@@ -13,7 +12,6 @@ class DynamicSoftmaxPG:
     def __init__(self, env, device="cpu", action_list = None):
         self.env = env
         self.optimal_V = env.evaluate_optimal_V()
-        #logging.info(f"Optimal_value is: {self.optimal_V}")
         self.device = device
         self.action_list = action_list
 
@@ -25,7 +23,6 @@ class DynamicSoftmaxPG:
         
         if self.seed is not None:
             torch.manual_seed(self.seed)
-            #logging.info(f"Random seed set to: {self.seed}")
 
     def init_policy(self, h, copy_weights, lr):
         policy = TabularSoftmaxPolicy(
