@@ -220,19 +220,17 @@ class FiniteMDP(gymnasium.Env):
                     else:  # vanilla softmax PG
                         _, _, action_probs = alg.policy.get_action(state)
                     
-                    help2 = action_probs
                     match state:
                         case 1: 
-                            actual_V_new[state] = torch.dot(help2, self.reward_function[state, :]).item()
+                            actual_V_new[state] = torch.dot(action_probs, self.reward_function[state, :]).item()
                         case 2:
-                            help2 = action_probs[torch.nonzero(help2)].squeeze()
+                            help2 = action_probs[torch.nonzero(action_probs)].squeeze()
                             actual_V_new[state] = torch.dot(help2, torch.tensor([self.reward_function[state, 0] + gamma * actual_V[1], self.reward_function[state, 1] + gamma * actual_V[3], self.reward_function[state, 2] + gamma * actual_V[4]])).item()
                         case 4:
                             x2 = self.reward_function[state, :] + torch.ones_like(torch.tensor(self.reward_function[state, :]))* gamma * actual_V[5]
-                            
-                            actual_V_new[state] = torch.dot(help2, x2).item() 
+                            actual_V_new[state] = torch.dot(action_probs, x2).item() 
                         case 5:
-                            actual_V_new[state] = torch.dot(help2, self.reward_function[state, :]).item()
+                            actual_V_new[state] = torch.dot(action_probs, self.reward_function[state, :]).item()
                     
                 eps = torch.max(torch.abs(torch.tensor(actual_V) - torch.tensor(actual_V_new))).item()
                 actual_V = actual_V_new
