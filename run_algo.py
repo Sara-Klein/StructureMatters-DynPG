@@ -36,7 +36,7 @@ def _run_algos():
         combinations = list(itertools.product(
             config.algorithm, config.env_name, config.action_list, config.reward_list,config.discount_factor,  
             config.eps, config.pg_lr, config.dpg_lr, config.adaptive, config.dpg_Ns,
-            config.cmax_interactions, config.gradient_clipping, config.reward_normalization, 
+            config.max_interactions, config.gradient_clipping, config.reward_normalization, 
             config.copy_weights, config.rounds
         ))
         
