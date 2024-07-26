@@ -18,7 +18,7 @@ class _AlgosConfig():
     dpg_Ns: Iterable[Iterable[float]] = ((50, 100, 150, 200, 250, 300),) # number of training steps for DynPG
     adaptive: Iterable[bool] = (True,) # then stepsizes (for PG and DynPG) and N_s (for DynPG) are choosen acording to the theory in the DynPG paper
 
-    computational_power: Iterable[int] = (1200,)#
+    max_interactions: Iterable[int] = (1200,)#
 
     
     gradient_clipping :Iterable[bool] = (False,)
