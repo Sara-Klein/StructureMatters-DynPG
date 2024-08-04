@@ -50,6 +50,7 @@ def plot_success_probs(max_interactions,discount_factor, rounds,pg_lr, dpg_lr, a
     plt.xlabel("Interactions with environment", fontsize=15)
     plt.ylabel("Success Probability", fontsize=15)
     plt.legend(loc="lower right", fontsize=15)
+    plt.title(f"gamma = {discount_factor}", fontsize=15)
 
     # set ticksize
     plt.xticks(fontsize=20)
