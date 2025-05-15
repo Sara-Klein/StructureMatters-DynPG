@@ -1,5 +1,3 @@
->📋  A template README.md for code accompanying a Machine Learning paper
-
 # Structure Matters: Dynamic Policy Gradient
 
 This repository is the official implementation of Structure Matters: Dynamic Policy Gradient. 
