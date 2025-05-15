@@ -4,10 +4,10 @@ This repository is the official implementation of Structure Matters: Dynamic Pol
 
 ## Requirements
 
-To install requirements:
+To install requirements and set up the folder run:
 
 ```setup
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ## Training
