@@ -34,3 +34,16 @@ You can modify the config.py file
 - computational_power: Maximal interactions with the environment (Algo stops when total samples > computational_power)
 - rounds: Number of runs to estimate the success probabilities
 
+
+## Citation:
+
+If you use the software, please cite the following [arXiv Preprint](https://arxiv.org/pdf/2411.04913):
+```
+@article{klein2024dynPG,
+      title={Structure Matters: Dynamic Policy Gradient}, 
+      author={Sara Klein and Xiangyuan Zhang and Tamer Başar and Simon Weissmann and Leif Döring},
+      journal = {arXiv preprint arXiv:2411.04913},
+      year = {2024}
+}
+```
+
